@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f5f4ef">
+<title>ShopEase — Online Store</title>
+<style>
+*{box-sizing:border-box}
+:root{color-scheme:light;--ink:#17231e;--muted:#758078;--green:#244b39;--green-light:#dce9df;--paper:#f5f4ef;--line:#e4e6df;--gold:#c49b58}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button,a{cursor:pointer}a{color:inherit;text-decoration:none}button,input{font:inherit}
+header{max-width:1180px;margin:auto;padding:22px 28px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo{font-family:Georgia,serif;font-size:26px;font-weight:700;letter-spacing:-.7px}.logo span{color:#64846e}
+.btn{background:var(--green);color:#fff;border:1px solid var(--green);border-radius:8px;padding:12px 17px;font-weight:700;box-shadow:0 5px 0 #183629,0 10px 20px #173a2c20;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{background:#315c46;transform:translateY(-2px);box-shadow:0 7px 0 #183629,0 14px 22px #173a2c24}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 #183629}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #c49b58;outline-offset:3px}
+main{max-width:1180px;margin:auto;padding:0 28px 42px}
+.hero{position:relative;isolation:isolate;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;min-height:350px;overflow:hidden;background:radial-gradient(ellipse at 82% 25%,#577765 0,#294b3a 33%,#172b22 78%);color:#fff;border:1px solid #ffffff24;border-radius:18px;padding:48px 6%;margin:12px 0 44px;box-shadow:0 20px 40px #1c342526,0 5px 12px #1c342514}
+.hero:before{content:"";position:absolute;z-index:-1;width:380px;height:380px;right:9%;top:50%;border:1px solid #ffffff1c;border-radius:50%;transform:translateY(-50%);box-shadow:0 0 0 32px #ffffff08,0 0 0 68px #ffffff05}
+.hero-copy{position:relative;z-index:2;max-width:510px}
+.hero .eyebrow{color:#d4bd91;font-size:11px;letter-spacing:2.5px;font-weight:bold}
+.hero h1{font-family:Georgia,serif;font-size:clamp(38px,5vw,60px);font-weight:500;line-height:1.02;letter-spacing:-1.7px;margin:16px 0}
+.hero p{color:#d9e3dc;line-height:1.7;max-width:390px;margin:0}
+.hero .shop-link{display:inline-block;margin-top:25px;background:#f5f1e8;color:#21392c;border-color:#f5f1e8;box-shadow:0 5px 0 #c9c4b8,0 10px 20px #0002}
+.hero .shop-link:hover{background:#fff;box-shadow:0 7px 0 #c9c4b8,0 14px 22px #0003}
+.hero-visual{position:relative;min-height:250px;display:grid;place-items:center;perspective:900px}
+.hero-product{position:relative;width:min(78%,320px);aspect-ratio:1/1;border:8px solid #ffffff17;border-radius:16px;overflow:hidden;transform:rotateY(-13deg) rotateX(5deg) rotateZ(2deg);box-shadow:22px 28px 35px #06170f70,0 0 0 1px #ffffff45;transition:transform .45s}
+.hero-product:hover{transform:rotateY(-5deg) rotateX(1deg) rotateZ(0) translateY(-5px)}
+.hero-product img{display:block;width:100%;height:100%;object-fit:cover}
+.hero-badge{position:absolute;right:2%;bottom:16%;padding:12px 16px;border:1px solid #ffffff80;border-radius:9px;background:#f8f6ef;color:var(--ink);box-shadow:0 12px 25px #06170f50;transform:translateZ(45px) rotate(-2deg)}
+.hero-badge strong,.hero-badge span{display:block}.hero-badge strong{font-family:Georgia,serif;font-size:15px}.hero-badge span{margin-top:4px;color:var(--muted);font-size:11px}
+.section-heading{font-family:Georgia,serif;font-size:28px;font-weight:500;letter-spacing:-.5px;margin:0 0 5px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin:0 0 20px}
+.muted{color:var(--muted);font-size:13px}
+input{padding:12px 14px;border:1px solid #d8dcd4;border-radius:8px;background:#fff;width:100%;font:inherit;box-shadow:inset 0 1px 2px #17231e08}
+.search{max-width:280px}
+.categories{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:21px}
+.category,.secondary{background:#fff;color:var(--ink);border:1px solid #d8dcd4;border-radius:7px;padding:9px 14px;transition:transform .2s,border-color .2s,background .2s}
+.category:hover,.secondary:hover{transform:translateY(-1px);border-color:#9cad9f}
+.category.active{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 3px 0 #183629}
+.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;perspective:1200px}
+.product{background:#fff;border:1px solid #e4e6df;border-radius:12px;overflow:hidden;box-shadow:0 3px 8px #17231e08,0 12px 22px #17231e08;transform:translateZ(0);transition:transform .28s,box-shadow .28s,border-color .28s}
+.product:hover{transform:translateY(-6px) rotateX(1deg);border-color:#d4dacf;box-shadow:0 8px 14px #17231e0c,0 22px 34px #17231e18}
+.product img{width:100%;height:205px;object-fit:cover;display:block;background:#eceee9;transition:transform .45s}
+.product:hover img{transform:scale(1.035)}
+.details{padding:17px}.product h3{font-family:Georgia,serif;font-size:18px;font-weight:500;margin:8px 0}
+.price{font-weight:700;margin:14px 0;color:#263c30}
+.product .btn{width:100%}
+.panel{margin-top:25px;padding:22px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:0 10px 25px #17231e0b}
+.hidden{display:none!important}.cartline{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.cart-actions{display:flex;align-items:center;gap:8px}.total{display:flex;justify-content:space-between;font-size:19px;font-weight:bold;padding:18px 0}
+form{display:grid;gap:14px}label{font-size:14px;font-weight:600}label input{display:block;margin-top:7px;font-weight:400}
+footer{text-align:center;color:var(--muted);border-top:1px solid #e0e2db;padding:23px;font-size:13px;margin-top:28px}
+@media(max-width:760px){header{padding:19px 20px}main{padding:0 20px 32px}.hero{grid-template-columns:1fr 0.8fr;padding:38px 5%;min-height:320px;margin-bottom:36px}.hero-visual{min-height:210px}.products{grid-template-columns:repeat(2,minmax(0,1fr))}.product img{height:175px}}
+@media(max-width:540px){header{padding:16px}.logo{font-size:23px}header>.btn{padding:10px 12px}main{padding:0 16px 28px}.hero{grid-template-columns:1fr;padding:32px 24px 24px;margin-top:6px}.hero h1{font-size:43px}.hero-visual{min-height:215px;margin-top:10px}.hero-product{width:190px}.hero-badge{right:7%;bottom:10%}.toolbar{align-items:stretch}.search{max-width:none}.section-heading{font-size:25px}.products{gap:12px}.product img{height:135px}.details{padding:12px}.product h3{font-size:16px}.product .btn{padding:10px 8px;font-size:13px}.category{padding:8px 11px}}
+@media(max-width:360px){.hero h1{font-size:37px}.products{grid-template-columns:1fr}.product img{height:190px}.cartline{align-items:flex-start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><a class="logo" href="#" aria-label="ShopEase home">Shop<span>Ease</span></a><button class="btn" id="cart-open" aria-label="Open shopping cart">Cart (<span id="cart-count">0</span>)</button></header>
+<main>
+<section class="hero"><div class="hero-copy"><div class="eyebrow">THOUGHTFULLY CHOSEN · MADE FOR EVERY DAY</div><h1>Find your next<br>favorite thing.</h1><p>Discover timeless essentials and little luxuries, selected to make everyday living feel special.</p><a class="btn shop-link" href="#shop-products">Explore the collection&nbsp; →</a></div><div class="hero-visual" aria-label="Featured wireless headphones"><div class="hero-product"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700" alt="Featured wireless headphones"></div><div class="hero-badge"><strong>The daily edit</strong><span>Considered essentials</span></div></div></section>
+<div class="toolbar"><div><h2 class="section-heading">The collection</h2><div class="muted">A considered selection for work, home and everywhere in between.</div></div><input class="search" id="search" type="search" aria-label="Search products" placeholder="Search the collection..."></div>
+<div class="categories"><button class="category active" data-cat="All">All</button><button class="category" data-cat="Electronics">Electronics</button><button class="category" data-cat="Fashion">Fashion</button><button class="category" data-cat="Home">Home</button></div>
+<div class="products" id="shop-products">
+<article class="product" data-name="Wireless Headphones" data-cat="Electronics"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600" alt="Wireless headphones"><div class="details"><div class="muted">Electronics</div><h3>Wireless Headphones</h3><div class="price">₹1,499</div><button class="btn add" data-id="1">Add to Cart</button></div></article>
+<article class="product" data-name="Classic Watch" data-cat="Fashion"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600" alt="Classic watch"><div class="details"><div class="muted">Fashion</div><h3>Classic Watch</h3><div class="price">₹2,299</div><button class="btn add" data-id="2">Add to Cart</button></div></article>
+<article class="product" data-name="Travel Backpack" data-cat="Fashion"><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600" alt="Travel backpack"><div class="details"><div class="muted">Fashion</div><h3>Travel Backpack</h3><div class="price">₹999</div><button class="btn add" data-id="3">Add to Cart</button></div></article>
+<article class="product" data-name="Modern Lamp" data-cat="Home"><img src="https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600" alt="Modern lamp"><div class="details"><div class="muted">Home</div><h3>Modern Lamp</h3><div class="price">₹799</div><button class="btn add" data-id="4">Add to Cart</button></div></article>
+<article class="product" data-name="Smart Speaker" data-cat="Electronics"><img src="https://images.unsplash.com/photo-1589003077984-894e133dabab?w=600" alt="Smart speaker"><div class="details"><div class="muted">Electronics</div><h3>Smart Speaker</h3><div class="price">₹1,899</div><button class="btn add" data-id="5">Add to Cart</button></div></article>
+<article class="product" data-name="Coffee Mug" data-cat="Home"><img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?w=600" alt="Coffee mug"><div class="details"><div class="muted">Home</div><h3>Coffee Mug</h3><div class="price">₹299</div><button class="btn add" data-id="6">Add to Cart</button></div></article>
+</div><p id="empty" class="hidden" style="text-align:center;padding:25px;color:#738078">No matching products found.</p>
+<section id="cart-panel" class="panel hidden"><div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Your Shopping Cart</h2><button class="secondary" id="cart-close">Close ✕</button></div><div id="cart-items"></div><div class="total"><span>Total</span><span id="cart-total">₹0</span></div><button class="btn" id="checkout">Proceed to Checkout →</button></section>
+<section id="checkout-panel" class="panel hidden"><h2>Checkout</h2><form id="checkout-form"><label>Full name<input required name="customer" placeholder="Your name"></label><label>Email address<input required type="email" name="email" placeholder="you@example.com"></label><label>Delivery address<input required name="address" placeholder="Street, city, PIN code"></label><button class="btn" type="submit">Place Demo Order</button></form><p class="muted">Demo checkout only. No real payment will be processed.</p><p id="order-success" class="hidden" style="background:#d9f4e4;color:#174a30;padding:12px;border-radius:8px"></p></section>
+</main><footer>© 2026 ShopEase · Made for happy shopping.</footer>
+<script>
+const products=[{id:1,name:'Wireless Headphones',price:1499},{id:2,name:'Classic Watch',price:2299},{id:3,name:'Travel Backpack',price:999},{id:4,name:'Modern Lamp',price:799},{id:5,name:'Smart Speaker',price:1899},{id:6,name:'Coffee Mug',price:299}];let cart={},category='All';
+const $=id=>document.getElementById(id),money=n=>'₹'+n.toLocaleString('en-IN');
+function render(){let count=Object.values(cart).reduce((a,b)=>a+b,0);$('cart-count').textContent=count;let items=products.filter(p=>cart[p.id]);$('cart-items').innerHTML=items.length?items.map(p=>`<div class="cartline"><div><b>${p.name}</b><div class="muted">${money(p.price)} × ${cart[p.id]}</div></div><div class="cart-actions"><button class="secondary qty" data-id="${p.id}" data-delta="-1">−</button>${cart[p.id]}<button class="secondary qty" data-id="${p.id}" data-delta="1">+</button><button class="secondary" data-remove="${p.id}">Remove</button></div></div>`).join(''):'<p>Your cart is empty. Add a product to get started!</p>';$('cart-total').textContent=money(items.reduce((s,p)=>s+p.price*cart[p.id],0))}
+function filter(){let q=$('search').value.toLowerCase(),visible=0;document.querySelectorAll('.product').forEach(el=>{let show=(category==='All'||el.dataset.cat===category)&&el.dataset.name.toLowerCase().includes(q);el.style.display=show?'':'none';if(show)visible++});$('empty').classList.toggle('hidden',visible!==0)}
+document.querySelectorAll('.add').forEach(b=>b.addEventListener('click',()=>{cart[b.dataset.id]=(cart[b.dataset.id]||0)+1;render();$('cart-panel').classList.remove('hidden')}));
+document.querySelectorAll('.category').forEach(b=>b.addEventListener('click',()=>{category=b.dataset.cat;document.querySelectorAll('.category').forEach(x=>x.classList.toggle('active',x===b));filter()}));
+$('search').addEventListener('input',filter);$('cart-open').onclick=()=>$('cart-panel').classList.toggle('hidden');$('cart-close').onclick=()=>$('cart-panel').classList.add('hidden');
+$('cart-items').addEventListener('click',e=>{let q=e.target.closest('[data-id]'),r=e.target.closest('[data-remove]');if(q){let id=q.dataset.id;cart[id]=(cart[id]||0)+Number(q.dataset.delta);if(cart[id]<=0)delete cart[id]}if(r)delete cart[r.dataset.remove];render()});
+$('checkout').onclick=()=>{if(!Object.keys(cart).length){alert('Your cart is empty!');return}$('checkout-panel').classList.remove('hidden');$('checkout-panel').scrollIntoView({behavior:'smooth'})};
+$('checkout-form').onsubmit=e=>{e.preventDefault();let name=new FormData(e.target).get('customer');$('order-success').textContent='Thank you, '+name+'! Your demo order has been placed. This is not a real purchase.';$('order-success').classList.remove('hidden');cart={};render();e.target.reset()};render();
+</script>
+</body></html>
